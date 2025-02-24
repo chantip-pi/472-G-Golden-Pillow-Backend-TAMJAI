@@ -32,6 +32,12 @@ When('I add a new delivering staff with username {string}', async function (user
   assert.strictEqual(response.status, 201, 'User registered successfully!');
 });
 
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:features/step_definitions/addPackRole.step_definition.js
+
+========
+>>>>>>> 0cbcc2c (Add test for deliver staff)
 Given('I am a {string} {string}', async function (role, username) {
   const userData = {
     username,
@@ -46,7 +52,11 @@ Given('I am a {string} {string}', async function (role, username) {
     district: 'Test District',
     province: 'Test Province',
     postal_code: '12345',
+<<<<<<< HEAD
     role: role,
+=======
+    role: 'delivering staff',
+>>>>>>> 0cbcc2c (Add test for deliver staff)
   };
 
   const response = await fetch('http://localhost:13889/register-admin-staff', {
@@ -60,6 +70,10 @@ Given('I am a {string} {string}', async function (role, username) {
   assert.strictEqual(response.status, 201, 'User registered successfully!');
   const user = await User.findOne({ where: { username } });
   assert(user, 'User should be found in the database');
+<<<<<<< HEAD
+=======
+  assert.strictEqual(user.role, role, 'User role should be delivering staff');
+>>>>>>> 0cbcc2c (Add test for deliver staff)
 });
 
 Given('I have an order with order_id {string}', async function (orderId) {
@@ -94,6 +108,7 @@ Then('A delivery order with order_id {string} and ems code {string} will be adde
   const delivery = allDelivery.find(order => order.order_id === parseInt(orderId, 10) && order.ems_code === ems_code);
   assert(delivery, 'Delivery Order should be found in the database');
 });
+<<<<<<< HEAD
 
 After(async function () {
   // Ensure to delete both the order and the user if they exist
@@ -111,6 +126,15 @@ After(async function () {
     assert.strictEqual(response.status, 200, 'Delivery Order deleted successfully');
   }
 
+=======
+>>>>>>>> 0cbcc2c (Add test for deliver staff):features/step_definitions/addDeliverRole.step_definition.js
+
+After(async function () {
+
+
+  const userToDelete = await User.findOne({ where: { username: 'deliver_user1' } });
+
+>>>>>>> 0cbcc2c (Add test for deliver staff)
   if (userToDelete) {
     const response = await axios.delete(`http://localhost:13889/delete-user/${userToDelete.user_id}`);
     assert.strictEqual(response.status, 200, 'User deleted successfully');
